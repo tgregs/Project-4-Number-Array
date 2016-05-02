@@ -1,0 +1,146 @@
+//Project Number 4 CST 112
+
+String title = "Project Number 4 Array of Numbers";
+String info = "Press a key with the first letter of the function (or q to exit)";
+String author = "Trevor Gregory";
+int [] num = {100,23,7,11,90,55,42,26,90,2,10};
+int numbers=  num.length;
+void setup(){
+  size (600,500);
+ 
+}
+
+void draw(){
+     background( 50,200,250 );
+      buttons();
+     fill( 150, 0, 0 );
+     int space=20;
+   
+    float x=50, y=50;
+    for (int i=0; i<numbers; i++) {
+      text( num[i], x, y );
+      y += space;             
+    }
+ 
+    y += space;
+  
+    //// Skip a line and display total and average
+    int total=  sum( num, numbers );
+    float avg=  float(total) / numbers;  
+    text( "The sum total is:      "+total, 90, y );
+    y += space;
+    text( "The mean average is:  "+avg, 90, y );
+    //// Title, etc..
+    textSize(20);
+    text( title, width/6, 20 );
+    textSize(12);
+    text( info, width/6, 40 );
+    text( "Keys:  b (Biggest), s (Smallest), i (Add + 1), d (Sub - 1), t (Triple nums), r(Random)", width/6, 55 );
+    text( author, 20, height-20 );
+  }
+  int sum( int a[], int m ) {
+    int result=0;
+    for (int i=0; i<m; i++ ) {
+      result += a[i];
+    }
+    return result;
+  }
+  
+
+
+void keyPressed() {
+  if (key == 'q') exit();
+  else if (key == 'b') big( num, numbers );
+  else if (key == 's') small( num, numbers );
+  //  
+  else if (key == 'i') inc( num, numbers );
+  else if (key == 'd') dec( num, numbers );
+  else if (key == 't') triple( num, numbers );
+  //
+  else if (key == 'r') randomize( num, numbers );
+  else text( "NO SUCH FUNCTION:  "+key, width/2, height/2 );
+  
+}
+void big( int a[], int m ) {
+  // Move the biggest number to the end of the array. 
+  // (Swap array elements, to keep all of the numbers.)
+  int w=0;
+  for (int i=1; i<m; i++) {
+    if (a[i] > a[w]) w=i;
+  }
+  int tmp;
+  tmp=  a[m-1];              // Save last element of array.
+  a[m-1]=  a[w];             // Store biggest at end.
+  a[w]=  tmp;
+}
+
+void small( int a[], int m ) {
+  // Move the smallest number to the beginning of the array 
+  // (Swap, to keep all numbers.)
+  int w=0;
+  for (int i=1; i<m; i++) {
+    if (a[i] < a[w]) w=i;
+  }
+  int tmp;
+  tmp=  a[0];                // Save first element of array.
+  a[0]=  a[w];               // Move selected element to the beginning.
+  a[w]=  tmp;
+}
+
+void inc( int a[], int m ) {
+  // Increase each number by one.
+  for (int i=0; i<m; i++) {
+    a[i]++;
+  }
+}
+
+void dec( int a[], int m ) {
+  // Decrease each number by one.
+ for (int i=0; i<m; i++) {
+    a[i]--;
+  }
+}
+
+void triple( int a[], int m ) {
+  // Triple each number.
+ for (int i=0; i<m; i++) {
+    a[i] *= 3;
+  }
+}
+void randomize( int a[], int m ) {
+  // Replace all numbers woth random values.
+ for (int i=0; i<m; i++) {
+    a[i]=  int( random( 0, 1000 ) );
+  }
+}
+
+void buttons(){
+ float x,y;
+ x=25;
+ y =400;
+ fill(0);
+rect(x,y,50,30);
+fill(50);
+rect(x+100,y,50,30);
+fill(100);
+rect(x+200,y,50,30);
+fill(150);
+rect(x+300,y,50,30);
+fill(200);
+rect(x+400,y,50,30);
+fill(250);
+rect(x+500,y,50,30);
+fill(255,0,0);
+
+text("Big",x+20,y+20);
+text("Small",x+112,y+20);
+text("Add",x+218,y+20);
+text("Sub",x+315,y+20);
+text("Triple",x+405,y+20);
+text("Random",x+502,y+20);
+
+}
+  
+ void mousePressed(){
+// Not sure how to make the button push work
+ }
